@@ -42,8 +42,28 @@ myApp.config(function($stateProvider) {
 
 // About page controller: define $scope.about as a string
 .controller('ChatBackController', function($scope, $firebaseAuth, $firebaseArray, $firebaseObject){
-	var postRef = new Firebase('https://chatback-info343.firebaseio.com/posts');
+	var ref = new Firebase('https://chatback-info343.firebaseio.com/chat');
 	var chatRef = new Firebase('https://chatback-info343.firebaseio.com/chat');
+
+	var postsRef = ref.child('posts');
+    var usersRef = ref.child("users");
+
+	$scope.posts = $firebaseArray(postssRef);
+	$scope.users = $firebaseObject(usersRef);
+
+	$scope.post = function() {
+		// Add a new object to the tweets array using the firebaseArray .$add method. 		
+		$scope.posts.$add({
+			text:$scope.newPost, 
+			userId:$scope.userId,  
+			time:Firebase.ServerValue.TIMESTAMP
+		})
+		
+		// Once the tweet is saved, reset the value of $scope.newTweet to empty string
+		.then(function() {
+			$scope.newTweet = ''
+		})
+	}
 })
 
 // Content controller: define $scope.url as an image

@@ -1,12 +1,55 @@
-<div class="container" ng-show="userId">
-	<form name="post-input" id="post-input">			
-		<textarea placeholder="What's Happening..." ng-model="newPost" name="text" class="form-control" requred ng-minlength="1"></textarea>
-							
-		<div class="form-group">
-			<button ng-click="post()" ng-disabled="post-input.$invalid" type="submit" class="btn btn-primary">
-				<i class="fa fa-pencil-square-o"></i> Post
-			</button> 					
-		</div>
+<div class="container">
+	<form name="myForm" ng-show="!userId" novalidate>
+
+				<!-- Bind model "email" to this input and make it required -->
+				<div class="form-group">
+					<label>Email:</label>
+					<input  ng-model="email" name="email" type="email" class="form-control"></input>
+
+					<!-- Show an error message if the email is not valid -->	
+					<p class="help-block" ng-show="myForm.email.$error.email">Not an email!</p>
+				</div>
+
+				<!-- Password -->
+				<div class="form-group">
+					<label>Password:</label>
+					<input  name="password" type="password" class="form-control" ng-model="password" required></input>      
+				</div>
+
+				<!-- Submit buttons: should only be active if certain inputs are valid -->
+				<div class="form-group">
+					<button ng-click="signUp()" ng-disabled="myForm.$invalid" type="submit" class="btn btn-warning">Sign-up</button> 
+					<button ng-click="logIn()" ng-disabled="myForm.email.$invalid || myForm.password.$invalid" type="submit" class="btn btn-warning">Sign-in</button>
+				</div>
 	</form>
 
+	<div ng-show="userId">
+		<form name="post-input" id="post-input">			
+			<textarea placeholder="What's Happening..." ng-model="newPost" name="text" class="form-control" requred ng-minlength="1"></textarea>
+								
+			<div class="form-group">
+				<button ng-click="post()" ng-disabled="post-input.$invalid" type="submit" class="btn btn-primary">
+					<i class="fa fa-pencil-square-o"></i> Post
+				</button> 					
+			</div>
+		</form>
+
+		<div>
+			<div class="well" ng-repeat="post in posts | orderBy : '-time'">
+				<div>
+					<span class="handle">{{userId}}</span>
+					<span class="time">{{post.time | date}}</span>
+				</div>
+
+				<div class="tweet">
+					{{tweet.text}}
+				</div>
+
+				<div class="likes">		
+					<i ng-click="like(tweet)" class="fa fa-heart"></i>
+					<span>{{tweet.likes}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
