@@ -1,0 +1,12 @@
+<div class="container" ng-show="userId">
+	<form name="post-input" id="post-input">			
+		<textarea placeholder="What's Happening..." ng-model="newPost" name="text" class="form-control" requred ng-minlength="1"></textarea>
+							
+		<div class="form-group">
+			<button ng-click="post()" ng-disabled="post-input.$invalid" type="submit" class="btn btn-primary">
+				<i class="fa fa-pencil-square-o"></i> Post
+			</button> 					
+		</div>
+	</form>
+
+</div>

@@ -42,12 +42,13 @@ myApp.config(function($stateProvider) {
 
 // About page controller: define $scope.about as a string
 .controller('ChatBackController', function($scope, $firebaseAuth, $firebaseArray, $firebaseObject){
-
+	var postRef = new Firebase('https://chatback-info343.firebaseio.com/posts');
+	var chatRef = new Firebase('https://chatback-info343.firebaseio.com/chat');
 })
 
 // Content controller: define $scope.url as an image
 .controller('ProfileController', function($scope, $firebaseAuth, $firebaseArray, $firebaseObject){
-
+	var ref = new Firebase('https://chatback-info343.firebaseio.com/');
 })
 
 .controller('PrivacyController', function($scope){
