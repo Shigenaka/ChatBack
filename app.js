@@ -4,39 +4,49 @@ var myApp = angular.module('myApp', ['ui.router'])
 // Configure app
 myApp.config(function($stateProvider) {
 	$stateProvider
-	.state('resume', {
-		url:'/resume',
-		templateUrl: 'templates/resume.html',
-		controller: 'ResumeController',
+	.state('application', {
+		url:'/application',
+		templateUrl: 'templates/application.html',
+		controller: 'ApplicationController',
 	})
-	.state('interests', {
-		url:'/interests',
-		templateUrl: 'templates/interests.html',
-		controller: 'InterestsController',
+	.state('about', {
+		url:'/',
+		templateUrl: 'templates/about.html',
+		controller: 'AboutController',
 	})
 
-	.state('work', {
-		url:'/work',
-		templateUrl: 'templates/work.html',
-		controller: 'WorkController',
+	.state('profile', {
+		url:'/profile',
+		templateUrl: 'templates/profile.html',
+		controller: 'ProfileController',
+	})
+	.state('privacy', {
+		url:'/privacy',
+		templateUrl: 'templates/privacy.html',
+		controller: 'PrivacyController',
+	})
+	.state('help', {
+		url:'/help',
+		templateUrl: 'templates/help.html',
+		controller: 'HelpController',
 	})
 })
 
 // Landing page controller: define $scope.number as a number
-.controller('ResumeController', function($scope){
-  $scope.resume = "../pics/resume2.jpg";
+.controller('ApplicationController', function($scope){
 })
 
 // About page controller: define $scope.about as a string
-.controller('interestsController', function($scope){
+.controller('AboutController', function($scope){
 })
 
 // Content controller: define $scope.url as an image
-.controller('WorkController', function($scope, $http){
-	// parses the json file and scopes the array
-	$http.get("projects.json").success(function(response){
-		$scope.projects = response;
-		console.log($scope.projects);
-	});
+.controller('ProfileController', function($scope){
+})
+
+.controller('PrivacyController', function($scope){
+})
+
+.controller('HelpController', function($scope){
 })
 
