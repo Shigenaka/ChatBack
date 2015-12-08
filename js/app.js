@@ -1,5 +1,5 @@
 // Create app
-var myApp = angular.module('myApp', ['ui.router' 'firebase'])
+var myApp = angular.module('myApp', ['ui.router', 'firebase'])
 
 // Configure app
 myApp.config(function($stateProvider) {
@@ -45,24 +45,45 @@ myApp.config(function($stateProvider) {
 	var ref = new Firebase('https://chatback-info343.firebaseio.com/chat');
 	var chatRef = new Firebase('https://chatback-info343.firebaseio.com/chat');
 
-	var postsRef = ref.child('posts');
-    var usersRef = ref.child("users");
+	$scope.authObj = $firebaseAuth(ref);
 
-	$scope.posts = $firebaseArray(postssRef);
-	$scope.users = $firebaseObject(usersRef);
+	var authData = $scope.authObj.$getAuth();
 
-	$scope.post = function() {
-		// Add a new object to the tweets array using the firebaseArray .$add method. 		
-		$scope.posts.$add({
-			text:$scope.newPost, 
-			userId:$scope.userId,  
-			time:Firebase.ServerValue.TIMESTAMP
+	//check to see if logged in already
+	if(authData) {
+		console.log(authData);
+		var chat = new FirechatUI(ref, document.getElementById('firechat-wrapper'));
+      	chat.setUser(authData.uid, authData.uid);
+	}
+
+	//sign up
+	$scope.signUp = function() {
+		$scope.authObj.$createUser({
+			email: $scope.email,
+			password: $scope.password, 			
 		})
-		
-		// Once the tweet is saved, reset the value of $scope.newTweet to empty string
-		.then(function() {
-			$scope.newTweet = ''
-		})
+		.then($scope.logIn)
+	}
+
+	//login
+	$scope.logIn = function() {
+		$scope.authObj.$authWithPassword({
+			email: $scope.email,
+			password: $scope.password
+		}).then(function(authData) {
+			  console.log("Logged in as:", authData.uid);
+			  $scope.userId = authData.uid
+			  var chat = new FirechatUI(ref, document.getElementById('firechat-wrapper'));
+      			chat.setUser(authData.uid, authData.uid);
+		}).catch(function(error) {
+			  console.error("Authentication failed:", error);
+		});
+	}
+
+	//logout
+	$scope.logOut = function() {
+		$scope.authObj.$unauth()
+		$scope.userId = false
 	}
 })
 
