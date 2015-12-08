@@ -43,7 +43,6 @@ myApp.config(function($stateProvider) {
 // About page controller: define $scope.about as a string
 .controller('ChatBackController', function($scope, $firebaseAuth, $firebaseArray, $firebaseObject){
 	var ref = new Firebase('https://chatback-info343.firebaseio.com/chat');
-	var chatRef = new Firebase('https://chatback-info343.firebaseio.com/chat');
 
 	$scope.authObj = $firebaseAuth(ref);
 
