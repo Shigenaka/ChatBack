@@ -1,77 +1,94 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
-    <head>
-            <meta charset="utf-8">
-            <title>ChatBack</title>
-            <link rel="shortcut icon" type="image/x-icon" href="https://www.occc.net/Planner/images/resLogo.png"/>
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-                    
-            <!-- jQuery -->
-            <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<head>
+        <meta charset="utf-8">
+        <title>ChatBack</title>
 
-            <!-- Firebase -->
-            <script src='https://cdn.firebase.com/js/client/2.0.2/firebase.js'></script>
+        <link rel="shortcut icon" type="image/x-icon" href="https://www.occc.net/Planner/images/resLogo.png"/>
 
-            <!-- Firechat -->
-            <link rel='stylesheet' href='https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.css' />
-            <script src='https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.js'></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            <!-- AngularFire -->
-            <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
-            <!-- ui-router library here -->
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+        <script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-            <!-- js -->
-            <script src="js/app.js"></script>
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-            <!-- css -->
-            <link href="css/main.css" rel="stylesheet" type="text/css">
+        <!--  BootStrap -->
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+        <!-- Latest compiled JavaScript -->
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+                
+        <!-- jQuery -->
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+
+        <!-- Firebase -->
+        <script src='https://cdn.firebase.com/js/client/2.0.2/firebase.js'></script>
+
+        <!-- Firechat -->
+        <link rel='stylesheet' href='https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.css' />
+        <script src='https://cdn.firebase.com/libs/firechat/2.0.1/firechat.min.js'></script>
+
+        <!-- ui-router library here -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+
+        <!-- js -->
+        <script src="js/app.js"></script>
+
+        <!-- css -->
+        <link href="css/main.css" rel="stylesheet" type="text/css">
 
 
-        </head>
-        <body>
-            <div>
-                <div class="navbar">
-                    <div class="container">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                            <a class="navbar-brand" href="#"><span>ChatBack</span></a>
-                        </div>
-                        <div class="collapse navbar-collapse" id="navbar-ex-collapse">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li class="active">
-                                    <a href="#">ChatBack</a>
-                                </li>
-                                <li>
-                                    <a href="#">Account</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+    </head>
+    <body>
+        <div>
+            <div class="navbar" id="nav">
+                <div class="container" id="nav">   
+                    <button type="button" ui-sref="sign-up" class="btn btn-warning">Sign-Up</button>
+                    <button type="button" ui-sref="login" class="btn btn-warning">Login</button>                  
                 </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <h1 class="text-muted">ChatBack</h1>
-                            <p class="text-muted">Sync minds. Share insights.</p>
-                            <br>
-                            <br>
-                        </div>
-                    </div>
-                </div>
-                <!-- template chatback application -->
             </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h1>ChatBack</h1>
+                        <p id="subheader">Sync minds. Share insights.</p>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <!-- template chatback application -->   
+        </div>
 
-            <div id="main" ui-view></div>
+        <!-- This is where your content will display -->
 
-            <footer class="section section-primary"> <div class="container"> <div class="row"> <div class="col-sm-6"> <h1>Footer header</h1> <p>Lorem ipsum dolor sit amet, consectetur adipisici elit, <br>sed eiusmod tempor incidunt ut labore et dolore magna aliqua. <br>Ut enim ad minim veniam, quis nostrud</p></footer>
+        
+        <img id="chat" src="img/chatting.jpg">
+        <div class="container" id="about">
+            <p>ChatBack is texting a game that allows users to share insight and mindfulness with one another.</p>
+        </div>    
+           
+        <img id="chat2" src="img/chat2.jpg">
+        <div class="container" id="about2">
+            <p>ChatBack keeps user's privacy safe so they feel comfortable talking about how they feel and give their true insight to each other.</p>
+        </div> 
+        <img id="chatback" src="img/chatback.png">
+        <div class="container" id="chatbackform">
+            <p>By following this initial prompt, you can tell how you feel, gain insight, and tell each other what you hope the outcome will be or what you want to change for yourself.</p>
+        </div>
+        <hr>
+        <div id="footer" class="footer">
+            <a href="">Home</a>
+            <a href="">Contact</a>
+            <a href="">Privacy</a>
+            <a href="">Help</a>
+            <p> &copy; ChatBack 2015</p>
+        </div>
     </body>
 </html>
