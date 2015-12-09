@@ -36,11 +36,11 @@
 
 
     </head>
-    <body>
+    <body ng-app="myApp" ng-controller="MainController">
         <div>
             <div class="navbar" id="nav">
                 <div class="container" id="nav">   
-                    <button type="button" ui-sref="profile" class="btn btn-warning">Profile</button>
+                    <button type="button" ui-sref="profile" class="btn btn-warning" ng-show="userId">Profile</button>
                     <button type="button" ui-sref="chatback" class="btn btn-warning">ChatBack</button>                  
                 </div>
             </div>

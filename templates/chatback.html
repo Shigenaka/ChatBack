@@ -1,31 +1,26 @@
 <div class="container">
 	<form name="myForm" ng-show="!userId" novalidate>
-
-				<!-- Bind model "email" to this input and make it required -->
-				<div class="form-group">
-					<label>Email:</label>
-					<input  ng-model="email" name="email" type="email" class="form-control"></input>
-
-					<!-- Show an error message if the email is not valid -->	
-					<p class="help-block" ng-show="myForm.email.$error.email">Not an email!</p>
-				</div>
+		<div class="form-group">
+			<label>Email:</label>
+			<input  ng-model="email" name="email" type="email" class="form-control"></input>	
+			<p class="help-block" ng-show="myForm.email.$error.email">Not an email!</p>
+		</div>
 
 				<!-- Password -->
-				<div class="form-group">
-					<label>Password:</label>
-					<input  name="password" type="password" class="form-control" ng-model="password" required></input>      
-				</div>
-
-				<!-- Submit buttons: should only be active if certain inputs are valid -->
-				<div class="form-group">
-					<button ng-click="signUp()" ng-disabled="myForm.$invalid" type="submit" class="btn btn-warning">Sign-up</button> 
-					<button ng-click="logIn()" ng-disabled="myForm.email.$invalid || myForm.password.$invalid" type="submit" class="btn btn-warning">Sign-in</button>
-				</div>
+		<div class="form-group">
+			<label>Password:</label>
+			<input  name="password" type="password" class="form-control" ng-model="password" required></input>      
+		</div>
+		
+		<div class="form-group">
+			<button ng-click="signUp()" ng-disabled="myForm.$invalid" type="submit" class="btn btn-warning">Sign-up</button> 
+			<button ng-click="logIn()" ng-disabled="myForm.email.$invalid || myForm.password.$invalid" type="submit" class="btn btn-warning">Sign-in</button>
+		</div>
 	</form>
 
 	<div ng-show="userId" class="grid">
-		<div id='firechat-wrapper' class="col-xs-8"></div>
-    	<div id="how-to" class="col-xs-4">
+		<div id='firechat-wrapper' class="col-xs-12 col-md-8"></div>
+    	<div id="how-to" class="col-xs-12 col-md-8">
     		<p>Hello</p>
     	</div>
 	</div>

@@ -34,6 +34,13 @@ myApp.config(function($stateProvider) {
 		controller: 'ContactController',
 	})
 })
+.controller('MainController', function(authentication, $scope, $firebaseAuth, $firebaseArray, $firebaseObject) {
+	var ref = new Firebase('https://chatback-info343.firebaseio.com/chat');
+	var user = authentication.checkLogin(ref);
+	if(user) {
+		$scope.userId = user.uid;
+	}
+})
 
 // Landing page controller: define $scope.number as a number
 .controller('AboutController', function($scope){
@@ -67,8 +74,15 @@ myApp.config(function($stateProvider) {
 })
 
 // Content controller: define $scope.url as an image
-.controller('ProfileController', function($scope, $firebaseAuth, $firebaseArray, $firebaseObject){
-	var ref = new Firebase('https://chatback-info343.firebaseio.com/');
+.controller('ProfileController', function(authentication, $scope, $firebaseAuth, $firebaseArray, $firebaseObject){
+	var ref = new Firebase('https://chatback-info343.firebaseio.com/chat');
+	var user = authentication.checkLogin(ref);
+	if(user) {
+		$scope.currEmail = user.password.email;
+		$scope.currUserID = user.uid;
+	}
+	var authObj = $firebaseAuth(ref);
+	console.log(authObj);
 })
 
 .controller('PrivacyController', function($scope){
