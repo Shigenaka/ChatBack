@@ -40,30 +40,55 @@ myApp.config(function($stateProvider) {
 
 })
 
-//controller for actual ChatBack segment
-.controller('ChatBackController', function(authentication, $scope, $firebaseAuth, $firebaseArray, $firebaseObject){
+// About page controller: define $scope.about as a string
+.controller('ChatBackController', function($scope, $firebaseAuth, $firebaseArray, $firebaseObject){
 	var ref = new Firebase('https://chatback-info343.firebaseio.com/chat');
 
-	var makeChat = function(user) {
-		$scope.userId = user.uid;
-	 	var chat = new FirechatUI(ref, document.getElementById('firechat-wrapper'));
-       	chat.setUser(user.uid, user.uid);
+	$scope.authObj = $firebaseAuth(ref);
+
+	var authData = $scope.authObj.$getAuth();
+
+	//check to see if logged in already
+	if(authData) {
+		$scope.userId = authData.uid
+		console.log(authData);
+		var chat = new FirechatUI(ref, document.getElementById('firechat-wrapper'));
+      	chat.setUser(authData.uid, authData.uid, function(user) {
+      		chat.enterRoom("-K52Bq-kg0ENsjGrtoRa");
+      	});
 	}
-	//checks if user is logged in
-	var user = authentication.checkLogin(ref);
-	if(user) {
-		makeChat(user)
-	}
-	//signs user up
+
+	//sign up
 	$scope.signUp = function() {
-		authentication.signUp(ref, $scope.email, $scope.password).then(function(){
-			$scope.logIn();
-		});
-	};
-	//logs user in
+		$scope.authObj.$createUser({
+			email: $scope.email,
+			password: $scope.password, 			
+		})
+		.then($scope.logIn)
+	}
+
+	//login
 	$scope.logIn = function() {
-		authentication.logIn(ref, $scope.email, $scope.password).then(makeChat);
-	};
+		$scope.authObj.$authWithPassword({
+			email: $scope.email,
+			password: $scope.password
+		}).then(function(authData) {
+			  console.log("Logged in as:", authData.uid);
+			  $scope.userId = authData.uid
+			  var chat = new FirechatUI(ref, document.getElementById('firechat-wrapper'));
+      			chat.setUser(authData.uid, authData.uid, function(user) {
+      				chat.enterRoom("-K52Bq-kg0ENsjGrtoRa");
+      			});
+		}).catch(function(error) {
+			  console.error("Authentication failed:", error);
+		});
+	}
+
+	//logout
+	$scope.logOut = function() {
+		$scope.authObj.$unauth()
+		$scope.userId = false
+	}
 })
 
 // Content controller: define $scope.url as an image
@@ -78,32 +103,4 @@ myApp.config(function($stateProvider) {
 .controller('ContactController', function($scope){
 
 })
-
-myApp.factory('authentication', function($firebaseAuth, $firebaseArray, $firebaseObject) {
-	var authFac = {};
-
-	authFac.checkLogin = function(ref) {
-		var authObj = $firebaseAuth(ref);
-		return authObj.$getAuth();
-	}
-
-	authFac.signUp = function(ref, email, password) {
-		var authObj = $firebaseAuth(ref);
-		return authObj.$createUser({
-			email: email,
-			password: password, 			
-		})
-
-	}
-
-	authFac.logIn = function(ref, email, password) {
-		var authObj = $firebaseAuth(ref);
-		return authObj.$authWithPassword({
-			email: email,
-			password: password
-		})
-	}
-
-	return authFac;
-});
 
