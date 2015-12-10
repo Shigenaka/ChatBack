@@ -71,6 +71,7 @@ myApp.config(function($stateProvider) {
 	//logs user in
 	$scope.logIn = function() {
 		authentication.logIn(ref, $scope.email, $scope.password).then(makeChat);
+		location.reload();
 	};
 
 	$scope.logOut = function() {
