@@ -72,6 +72,11 @@ myApp.config(function($stateProvider) {
 	$scope.logIn = function() {
 		authentication.logIn(ref, $scope.email, $scope.password).then(makeChat);
 	};
+
+	$scope.logOut = function() {
+		authentication.logOut(ref)
+		window.location.replace("https://staff.washington.edu/mshig19/info343/ChatBack/");
+	};
 })
 
 // Content controller: define $scope.url as an image
@@ -153,6 +158,11 @@ myApp.factory('authentication', function($firebaseAuth, $firebaseArray, $firebas
 		  	oldPassword: oPassword,
 			newPassword: nPassword
 		})
+	}
+
+	authFac.logOut = function(ref) {
+		var authObj = $firebaseAuth(ref);
+		return authObj.$unauth();
 	}
 
 	return authFac;

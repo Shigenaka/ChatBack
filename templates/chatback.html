@@ -14,7 +14,6 @@
 			<p class="help-block" ng-show="myForm.email.$error.email">Not an email!</p>
 		</div>
 
-				<!-- Password -->
 		<div class="form-group" id="password">
 			<label>Password:</label>
 			<input  name="password" type="password" class="form-control" ng-model="password" required></input>      
@@ -25,6 +24,12 @@
 			<button ng-click="logIn()" ng-disabled="myForm.email.$invalid || myForm.password.$invalid" type="submit" class="btn btn-primary">Sign-in</button>
 		</div>
 	</form>
+
+	<div id="logout" ng-show="userId">
+		<center>
+			<button ng-click="logOut()" type="submit" class="btn btn-primary">Logout</button> 
+		</center>
+	</div>
 
 	<div ng-show="userId" class="grid">
 		<div id='firechat-wrapper' class="col-xs-12 col-md-8"></div>
