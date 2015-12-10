@@ -11,7 +11,7 @@ myApp.config(function($stateProvider) {
 	})
 
 	.state('chatback', {
-		url:'/#{path:.*}',
+		url:'',
 		templateUrl: 'templates/chatback.html',
 		controller: 'ChatBackController',
 	})
@@ -39,6 +39,7 @@ myApp.config(function($stateProvider) {
 	var user = authentication.checkLogin(ref);
 	if(user) {
 		$scope.userId = user.uid;
+		console.log($scope.userId)
 	}
 })
 
@@ -78,10 +79,29 @@ myApp.config(function($stateProvider) {
 	var ref = new Firebase('https://chatback-info343.firebaseio.com/chat');
 	var user = authentication.checkLogin(ref);
 	if(user) {
-		$scope.currEmail = user.password.email;
-		$scope.currUserID = user.uid;
+		$scope.userId = user.uid;
+		console.log($scope.userId)
 	}
-	var authObj = $firebaseAuth(ref);
+	$scope.showEmail = function() {
+		$scope.changeEmail ^= true;
+		$scope.changePassword = false;
+	}
+
+	$scope.showPassword = function() {
+		$scope.changePassword ^= true;
+		$scope.changeEmail = false;
+	}
+	$scope.changeEmail = function() {
+		authentication.changeEmail(ref, $scope.emOldEmail, $scope.emOldPassword, $scope.newEmail).then(function() {
+			alert('You changed your email, it will reflect this change the next time you log in.');
+		});
+	}
+
+	$scope.changePassword = function() {
+		authentication.changePassword(ref, $scope.passOldEmail, $scope.passOldPassword, $scope.newPassword).then(function() {
+			alert('You changed your password, it will reflect this change the next time you log in.');
+		});
+	}
 })
 
 .controller('PrivacyController', function($scope){
@@ -114,6 +134,24 @@ myApp.factory('authentication', function($firebaseAuth, $firebaseArray, $firebas
 		return authObj.$authWithPassword({
 			email: email,
 			password: password
+		})
+	}
+
+	authFac.changeEmail = function(ref, oEmail, password, nEmail) {
+		var authObj = $firebaseAuth(ref);
+		return authObj.$changeEmail({
+			oldEmail: oEmail,
+		  	newEmail: nEmail,
+		  	password: password
+		});
+	}
+
+	authFac.changePassword = function(ref, email, oPassword, nPassword) {
+		var authObj = $firebaseAuth(ref);
+		return authObj.$changePassword({
+		  	email: email,
+		  	oldPassword: oPassword,
+			newPassword: nPassword
 		})
 	}
 

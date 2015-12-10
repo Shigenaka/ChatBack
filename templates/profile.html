@@ -1,5 +1,39 @@
 <div class="container">
 	<h1 id="chatbackProfile">Profile</h1>
-	<h1><b>Hello, {{currEmail}}</b></h1>
-	<h1><b>Your current ID is:</b> {{currUserID}}</h1>
+	<h1><b>Hello,</b></h1>
+	<h1><b>Your current ID is:</b> {{userId}}</h1>
+
+	<br>
+	<h2>Change Email:</h2>
+	<form name="myForm">
+		<label>Email:</label>
+		<input  ng-model="emOldEmail" name="email" type="email" class="form-control" required></input>	
+		<p class="help-block" ng-show="myForm.email.$error.email">Invalid Email!</p>
+
+		<label>Password:</label>
+		<input  name="emOldPassword" type="password" class="form-control" ng-model="emOldPassword" required></input>      
+
+		<label>New Email:</label>
+		<input  ng-model="newEmail" name="email" type="email" class="form-control"></input>	
+		<p class="help-block" ng-show="myForm.email.$error.email">Invalid Email!</p>
+		<br>
+
+		<button ng-click="changeEmail()" ng-disabled="myForm.email.$invalid || myForm.password.$invalid" type="submit" class="btn btn-primary">Change Email</button>
+	</form>
+
+	<br>
+	<h2>Change Password:</h2>
+	<form name="myForm">
+			<label>Email:</label>
+			<input  ng-model="passOldEmail" name="email" type="email" class="form-control" required></input>	
+			<p class="help-block" ng-show="myForm.email.$error.email">Invalid Email!</p>
+
+			<label>Password:</label>
+			<input  name="passOldPassword" type="password" class="form-control" ng-model="passOldPassword" required></input>      
+
+			<label>New Password:</label>
+			<input  name="newPassword" type="password" class="form-control" ng-model="newPassword" required></input>      
+			<br>
+			<button ng-click="changePassword()" ng-disabled="myForm.email.$invalid || myForm.password.$invalid" type="submit" class="btn btn-primary">Change Password</button>
+	</form>
 </div>
