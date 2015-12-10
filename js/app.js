@@ -11,7 +11,7 @@ myApp.config(function($stateProvider) {
 	})
 
 	.state('chatback', {
-		url:'',
+		url:'/#{path:.*}',
 		templateUrl: 'templates/chatback.html',
 		controller: 'ChatBackController',
 	})
@@ -119,10 +119,4 @@ myApp.factory('authentication', function($firebaseAuth, $firebaseArray, $firebas
 
 	return authFac;
 });
-
-myApp.config(function($urlRouterProvider){
-    // when there is an empty route, redirect to /index   
-    $urlRouterProvider.when('', '/#');
-    $urlRouterProvider.when('/#/-K52Bq-kg0ENsjGrtoRa', '/#');
-})
 
