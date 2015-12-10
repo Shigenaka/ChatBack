@@ -27,7 +27,7 @@ p {
   font-size: 125%;
 }
 
-#chat {
+#chat, #padlock, #research {
   float: left;
   padding: 3em;
   height: 50%;
@@ -38,7 +38,7 @@ p {
   padding-top: 5em;
 }
 
-#chat2 {
+#chat2, #database {
   float: right;
   padding: 3em;
   height: 50%;
@@ -71,4 +71,8 @@ p {
 #footer p {
   float: right;
   padding: 3em;
+}
+
+#howTo {
+  max-height: 475px;
 }
