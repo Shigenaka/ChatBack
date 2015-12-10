@@ -1,4 +1,2 @@
 # ChatBack
-This is ChatBack
-ChatBack is cool
-ChatBack is life
+This is ChatBack, an idea that Katie O'Leary at the University of Washington came up with. ChatBack is a peer to peer counselling application where users can come to talk about their feelings and help one another out. This is purely a prototype and should not be used or launched in public, this is meant as a visualization tool to see what the application can become and for Katie to use in closed testing.
