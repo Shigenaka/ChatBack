@@ -29,8 +29,9 @@
 	<div id="logout" ng-show="userId">
 		<center>
 			<button type="submit" class="btn btn-primary">
-				<a id="chatbackAcc" ui-sref="profile">Account</a>
-			</button>
+				<a id="chatbackAcc" ui-sref="profile">
+					<button type="submit" class="btn btn-primary">Account</button>
+				</a>
 			<button ng-click="logOut()" type="submit" class="btn btn-primary">Logout</button> 
 		</center>
 	</div>
