@@ -82,39 +82,6 @@ myApp.config(function($stateProvider) {
 		$scope.currUserID = user.uid;
 	}
 	var authObj = $firebaseAuth(ref);
-	console.log(authObj);
-
-	//change email
-	// authObj.$changeEmail({
- //    	oldEmail: $scope.currEmail,
- //    	newEmail: $scope.newEmail,
- //    	password: $scope.currPassword,
- //    }).then(function() {
- //    	console.log("Email changed successfully!");
- //    }).catch(function(error) {
- //    	console.error("Error: ", error);
- //    });
-
- //    //change password
- //    authObj.$changePassword({
-	//     email: "my@email.com",
- //  		oldPassword: "mypassword",
- //  		newPassword: "otherpassword"
-	// }).then(function() {
-	//   	console.log("Password changed successfully!");
-	// }).catch(function(error) {
-	//  	console.error("Error: ", error);
-	// });
-
-	// //delete user
-	// authObj.$removeUser({
-	//   	email: "my@email.com",
-	//  	password: "mypassword"
-	// }).then(function() {
-	//   	console.log("User removed successfully!");
-	// }).catch(function(error) {
-	//   	console.error("Error: ", error);
-	// });
 })
 
 .controller('PrivacyController', function($scope){
@@ -152,4 +119,10 @@ myApp.factory('authentication', function($firebaseAuth, $firebaseArray, $firebas
 
 	return authFac;
 });
+
+myApp.config(function($urlRouterProvider){
+    // when there is an empty route, redirect to /index   
+    $urlRouterProvider.when('', '/#');
+    $urlRouterProvider.when('/#/-K52Bq-kg0ENsjGrtoRa', '/#');
+})
 

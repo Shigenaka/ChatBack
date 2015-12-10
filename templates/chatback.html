@@ -1,27 +1,35 @@
+<div class="container" id="chatbackHead">
+    <h1 id="chatbackTitle"><img id="chatbackIcon" src="../img/message.png"><b>ChatBack<b></h1>
+    <p id="subheader">Sync minds. Share insights.</p>
+    <br>
+    <br>
+</div>
+
+
 <div class="container">
 	<form name="myForm" ng-show="!userId" novalidate>
-		<div class="form-group">
+		<div class="form-group" id="email">
 			<label>Email:</label>
 			<input  ng-model="email" name="email" type="email" class="form-control"></input>	
 			<p class="help-block" ng-show="myForm.email.$error.email">Not an email!</p>
 		</div>
 
 				<!-- Password -->
-		<div class="form-group">
+		<div class="form-group" id="password">
 			<label>Password:</label>
 			<input  name="password" type="password" class="form-control" ng-model="password" required></input>      
 		</div>
 		
-		<div class="form-group">
-			<button ng-click="signUp()" ng-disabled="myForm.$invalid" type="submit" class="btn btn-warning">Sign-up</button> 
-			<button ng-click="logIn()" ng-disabled="myForm.email.$invalid || myForm.password.$invalid" type="submit" class="btn btn-warning">Sign-in</button>
+		<div class="form-group" id="buttons">
+			<button ng-click="signUp()" ng-disabled="myForm.$invalid" type="submit" class="btn btn-default">Sign-up</button> 
+			<button ng-click="logIn()" ng-disabled="myForm.email.$invalid || myForm.password.$invalid" type="submit" class="btn btn-default">Sign-in</button>
 		</div>
 	</form>
 
 	<div ng-show="userId" class="grid">
-		<div id='firechat-wrapper' class="col-xs-6 col-md-8"></div>
-    	<div id="how-to" class="col-xs-6 col-md-4">
-    		<img id="howTo"src="../img/chatback.jpg">
+		<div id='firechat-wrapper' class="col-xs-12 col-md-8"></div>
+    	<div id="how-to" class="col-xs-12 col-md-4">
+    		<img id="chatbackHowTo"src="../img/chatbackForm.png">
     	</div>
 	</div>
 </div>
