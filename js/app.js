@@ -1,7 +1,7 @@
 // Create app
 var myApp = angular.module('myApp', ['ui.router', 'firebase'])
 
-// Configure app
+// Configure app and include needed controllers
 myApp.config(function($stateProvider) {
 	$stateProvider
 	.state('about', {
@@ -34,6 +34,8 @@ myApp.config(function($stateProvider) {
 		controller: 'ContactController',
 	})
 })
+
+//overall controller for application
 .controller('MainController', function(authentication, $scope, $firebaseAuth, $firebaseArray, $firebaseObject) {
 	var ref = new Firebase('https://chatback-info343.firebaseio.com/chat');
 	var user = authentication.checkLogin(ref);
@@ -43,15 +45,16 @@ myApp.config(function($stateProvider) {
 	}
 })
 
-// Landing page controller: define $scope.number as a number
+// about page controller if needed
 .controller('AboutController', function($scope){
 
 })
 
-//controller for actual ChatBack segment
+//controller for ChatBack application segment
 .controller('ChatBackController', function(authentication, $scope, $firebaseAuth, $firebaseArray, $firebaseObject){
 	var ref = new Firebase('https://chatback-info343.firebaseio.com/chat');
 
+	//makes firechat
 	var makeChat = function(user) {
 		$scope.userId = user.uid;
 	 	var chat = new FirechatUI(ref, document.getElementById('firechat-wrapper'));
@@ -73,50 +76,60 @@ myApp.config(function($stateProvider) {
 		authentication.logIn(ref, $scope.email, $scope.password).then(makeChat);
 	};
 
+	//logs out user
 	$scope.logOut = function() {
 		authentication.logOut(ref)
 		window.location.replace("https://staff.washington.edu/mshig19/info343/ChatBack/");
 	};
 })
 
-// Content controller: define $scope.url as an image
+// Profile Controller
 .controller('ProfileController', function(authentication, $scope, $firebaseAuth, $firebaseArray, $firebaseObject){
+	
+	//Gets user information to display
 	var ref = new Firebase('https://chatback-info343.firebaseio.com/chat');
 	var user = authentication.checkLogin(ref);
 	if(user) {
 		$scope.userId = user.uid;
 		console.log($scope.userId)
 	}
-	$scope.showEmail = function() {
-		$scope.changeEmail ^= true;
-		$scope.changePassword = false;
-	}
 
-	$scope.showPassword = function() {
-		$scope.changePassword ^= true;
-		$scope.changeEmail = false;
-	}
+	//Change email function
 	$scope.changeEmail = function() {
 		authentication.changeEmail(ref, $scope.emOldEmail, $scope.emOldPassword, $scope.newEmail).then(function() {
 			alert('You changed your email, it will reflect this change the next time you log in.');
+
+			//sets all of the form inputs to blank
+			$scope.emOldEmail = '';
+			$scope.emOldPassword = '';
+			$scope.newEmail = '';
 		});
 	}
 
+	//Change password function
 	$scope.changePassword = function() {
 		authentication.changePassword(ref, $scope.passOldEmail, $scope.passOldPassword, $scope.newPassword).then(function() {
 			alert('You changed your password, it will reflect this change the next time you log in.');
+
+			//sets all of the form inputs to blank
+			$scope.passOldEmail = '';
+			$scope.passOldPassword = '';
+			$scope.newPassword = ''
 		});
 	}
 })
 
+//for privacy policy if needed
 .controller('PrivacyController', function($scope){
 
 })
 
+//for contact page if needed
 .controller('ContactController', function($scope){
 
 })
 
+//factory that handles all authentication aspects, methods return promises
 myApp.factory('authentication', function($firebaseAuth, $firebaseArray, $firebaseObject) {
 	var authFac = {};
 
