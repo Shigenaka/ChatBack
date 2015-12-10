@@ -41,10 +41,6 @@ myApp.config(function($stateProvider) {
 		$scope.userId = user.uid;
 		console.log($scope.userId)
 	}
-
-	$scope.goToChatBack = function() {
-		window.location.replace("https://staff.washington.edu/mshig19/info343/ChatBack/");
-	}
 })
 
 // Landing page controller: define $scope.number as a number
@@ -75,7 +71,6 @@ myApp.config(function($stateProvider) {
 	//logs user in
 	$scope.logIn = function() {
 		authentication.logIn(ref, $scope.email, $scope.password).then(makeChat);
-		window.location.replace("https://staff.washington.edu/mshig19/info343/ChatBack/");
 	};
 
 	$scope.logOut = function() {
